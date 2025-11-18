@@ -1,0 +1,27 @@
+service: deskjockey-website
+
+# Name of the container image.
+image: ddeskjjockey/deskjockey.tech
+
+servers:
+  - srv936375.hstgr.cloud
+
+ssh:
+  keys_only: true
+  keys:
+    - ~/.ssh/deskjockey.hostinger
+
+registry:
+  username: ddeskjjockey
+  password:
+    - KAMAL_REGISTRY_PASSWORD
+
+proxy:
+  ssl: true
+  host: deskjockey.tech
+  app_port: 8000
+
+builder:
+  arch:
+    - x86_64
+  context: .
