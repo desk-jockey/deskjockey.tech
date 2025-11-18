@@ -1,0 +1,17 @@
+# Name of your application. Used to uniquely configure containers.
+service: deskjockey.tech
+
+# Name of the container image.
+image: ddeskjjockey/deskjockey.tech
+
+# Deploy to these servers.
+servers:
+  - 148.230.87.245
+
+proxy:
+  ssl: true
+  host: deskjockey.tech
+  app_port: 8000
+
+builder:
+  arch: amd64
