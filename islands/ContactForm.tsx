@@ -1,5 +1,7 @@
 // islands/ContactForm.tsx
+import { KeyboardEventHandler } from "preact";
 import { useState } from "preact/hooks";
+import { signal } from "@preact/signals";
 
 interface FormData {
   name: string;
@@ -63,6 +65,12 @@ export default function ContactForm() {
     }
   };
 
+  const handleShortcuts: KeyboardEventHandler<HTMLElement> = (event) => {
+    if ((event.ctrlKey || event.metaKey) && event.key === "Enter") {
+      handleSubmit(event);
+    }
+  };
+
   return (
     <div class="card max-w-3xl mx-auto">
       <div class="text-center mb-8">
@@ -75,7 +83,11 @@ export default function ContactForm() {
         </p>
       </div>
 
-      <form onSubmit={handleSubmit} class="flex flex-col gap-6">
+      <form
+        onSubmit={handleSubmit}
+        onKeyDown={handleShortcuts}
+        class="flex flex-col gap-6"
+      >
         <div>
           <label
             htmlFor="name"
@@ -90,6 +102,7 @@ export default function ContactForm() {
             value={formData.name}
             onChange={handleChange}
             required
+            autocomplete={signal("on")}
             class="input-field"
           />
         </div>
@@ -107,7 +120,8 @@ export default function ContactForm() {
             name="email"
             value={formData.email}
             onChange={handleChange}
-            required
+            required={signal(true)}
+            autocomplete={signal("on")}
             class="input-field"
           />
         </div>
@@ -124,7 +138,7 @@ export default function ContactForm() {
             name="message"
             value={formData.message}
             onChange={handleChange}
-            required
+            required={signal(true)}
             rows={6}
             class="input-field resize-y font-sans"
           />
@@ -153,4 +167,3 @@ export default function ContactForm() {
     </div>
   );
 }
-
