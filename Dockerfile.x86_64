@@ -2,15 +2,15 @@ FROM denoland/deno:alpine-2.5.6 AS install
 ARG GIT_REVISION
 ENV DENO_DEPLOYMENT_ID=${GIT_REVISION}
 WORKDIR /app
-COPY . .
 RUN deno install
 
 FROM install AS build
 RUN deno task build
+COPY . .
 
 FROM build AS cache
 RUN deno cache _fresh/server.js
 
 FROM cache AS serve
 EXPOSE 8000
-CMD ["task", "start"]
+CMD ["serve", "-A", "_fresh/server.js"]
