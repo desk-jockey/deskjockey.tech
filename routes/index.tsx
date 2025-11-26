@@ -27,7 +27,7 @@ export default function Home() {
 
           <div class="relative z-10 text-center px-4">
             <div class="mb-4 text-accent-aqua text-sm font-mono">
-              @desk-jockey
+              <a href="https://github.com/desk-jockey">@desk-jockey</a>
             </div>
             <h1 class="text-7xl font-bold mb-6 text-fg-bright">
               Brian Lehrer
